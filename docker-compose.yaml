@@ -1,0 +1,21 @@
+services:
+  member_service_db:
+    image: postgres:17
+    container_name: member_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: service_app_java
+    ports:
+      - "5433:5432"
+    volumes:
+      - member-service-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d service_app_java"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  member-service-db-data:
