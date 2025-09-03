@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -69,6 +70,7 @@ class MemberControllerUnitTest {
                 .thenReturn(createdMember);
 
         mockMvc.perform(post("/api/v1/managers/{managerId}/members", managerId)
+                        .with(jwt())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
@@ -103,7 +105,8 @@ class MemberControllerUnitTest {
 
         when(memberService.getAllMembersByManagerId(managerId)).thenReturn(memberList);
 
-        mockMvc.perform(get("/api/v1/managers/{managerId}/members", managerId))
+        mockMvc.perform(get("/api/v1/managers/{managerId}/members", managerId)
+                        .with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(101)))
