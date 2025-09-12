@@ -1,4 +1,4 @@
-package com.eslirodrigues.service_app_java.entity;
+package com.eslirodrigues.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,13 +43,15 @@ public class Member {
         if (o == null) return false;
         Class<?> oEffectiveClass;
         if (o instanceof HibernateProxy hibernateProxy) {
-            oEffectiveClass = hibernateProxy.getHibernateLazyInitializer().getPersistentClass();
+            oEffectiveClass =
+                    hibernateProxy.getHibernateLazyInitializer().getPersistentClass();
         } else {
             oEffectiveClass = o.getClass();
         }
         Class<?> thisEffectiveClass;
         if (this instanceof HibernateProxy hibernateProxy) {
-            thisEffectiveClass = hibernateProxy.getHibernateLazyInitializer().getPersistentClass();
+            thisEffectiveClass =
+                    hibernateProxy.getHibernateLazyInitializer().getPersistentClass();
         } else {
             thisEffectiveClass = this.getClass();
         }
@@ -63,7 +65,8 @@ public class Member {
     @Override
     public final int hashCode() {
         if (this instanceof HibernateProxy hibernateProxy) {
-            return hibernateProxy.getHibernateLazyInitializer().getPersistentClass().hashCode();
+            return hibernateProxy.getHibernateLazyInitializer()
+                    .getPersistentClass().hashCode();
         }
         return getClass().hashCode();
     }

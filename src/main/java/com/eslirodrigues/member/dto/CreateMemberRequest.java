@@ -1,6 +1,6 @@
-package com.eslirodrigues.service_app_java.dto;
+package com.eslirodrigues.member.dto;
 
-import com.eslirodrigues.service_app_java.entity.ServiceType;
+import com.eslirodrigues.member.entity.ServiceType;
 
 import java.time.LocalDate;
 

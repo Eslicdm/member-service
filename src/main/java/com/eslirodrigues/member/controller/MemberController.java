@@ -1,8 +1,8 @@
-package com.eslirodrigues.service_app_java.controller;
+package com.eslirodrigues.member.controller;
 
-import com.eslirodrigues.service_app_java.dto.CreateMemberRequest;
-import com.eslirodrigues.service_app_java.entity.Member;
-import com.eslirodrigues.service_app_java.service.MemberService;
+import com.eslirodrigues.member.dto.CreateMemberRequest;
+import com.eslirodrigues.member.entity.Member;
+import com.eslirodrigues.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

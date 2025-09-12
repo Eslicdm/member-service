@@ -1,4 +1,4 @@
-package com.eslirodrigues.service_app_java;
+package com.eslirodrigues.member;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

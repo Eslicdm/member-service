@@ -1,6 +1,6 @@
-package com.eslirodrigues.service_app_java.repository;
+package com.eslirodrigues.member.repository;
 
-import com.eslirodrigues.service_app_java.entity.Member;
+import com.eslirodrigues.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
-package com.eslirodrigues.service_app_java.controller;
+package com.eslirodrigues.member.controller;
 
-import com.eslirodrigues.service_app_java.dto.CreateMemberRequest;
-import com.eslirodrigues.service_app_java.entity.Member;
-import com.eslirodrigues.service_app_java.entity.ServiceType;
-import com.eslirodrigues.service_app_java.service.MemberService;
+import com.eslirodrigues.member.dto.CreateMemberRequest;
+import com.eslirodrigues.member.entity.Member;
+import com.eslirodrigues.member.entity.ServiceType;
+import com.eslirodrigues.member.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

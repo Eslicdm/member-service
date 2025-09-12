@@ -1,7 +1,7 @@
-package com.eslirodrigues.service_app_java.controller;
+package com.eslirodrigues.member.controller;
 
-import com.eslirodrigues.service_app_java.dto.CreateMemberRequest;
-import com.eslirodrigues.service_app_java.entity.ServiceType;
+import com.eslirodrigues.member.dto.CreateMemberRequest;
+import com.eslirodrigues.member.entity.ServiceType;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +55,10 @@ class MemberControllerTest {
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
         registry.add("spring.jpa.hibernate.ddl-auto", () -> "validate");
-        registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> "http://dummy-issuer");
+        registry.add(
+                "spring.security.oauth2.resourceserver.jwt.issuer-uri",
+                () -> "http://dummy-issuer"
+        );
     }
 
     @BeforeEach

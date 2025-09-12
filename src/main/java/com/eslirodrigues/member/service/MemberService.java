@@ -1,8 +1,8 @@
-package com.eslirodrigues.service_app_java.service;
+package com.eslirodrigues.member.service;
 
-import com.eslirodrigues.service_app_java.dto.CreateMemberRequest;
-import com.eslirodrigues.service_app_java.entity.Member;
-import com.eslirodrigues.service_app_java.repository.MemberRepository;
+import com.eslirodrigues.member.dto.CreateMemberRequest;
+import com.eslirodrigues.member.entity.Member;
+import com.eslirodrigues.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

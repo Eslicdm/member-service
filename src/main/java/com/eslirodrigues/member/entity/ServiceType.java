@@ -1,4 +1,4 @@
-package com.eslirodrigues.service_app_java.entity;
+package com.eslirodrigues.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
