@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
 @Sql(scripts = "/cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-class MemberControllerTest {
+class MemberControllerIT {
 
     @LocalServerPort
     private Integer port;
