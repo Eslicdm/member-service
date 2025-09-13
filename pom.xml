@@ -128,7 +128,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-                    <forkCount>1</forkCount>
+                    <forkCount>0</forkCount>
                     <reuseForks>false</reuseForks>
 					<argLine>-Xmx1024m @{argLine} -XX:+EnableDynamicAgentLoading</argLine>
 				</configuration>
@@ -145,6 +145,8 @@
 					</execution>
 				</executions>
 				<configuration>
+                    <forkCount>0</forkCount>
+                    <reuseForks>false</reuseForks>
 					<argLine>-Xmx1024m @{argLine} -XX:+EnableDynamicAgentLoading</argLine>
 				</configuration>
 			</plugin>
