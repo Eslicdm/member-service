@@ -10,96 +10,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      member_service_db:
-        image: postgres:17
-        env:
-          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.DB_NAME }}
-        ports:
-          - 5435:5432
-        options: >-
-          --health-cmd="pg_isready -U ${{ secrets.DB_USERNAME }} -d ${{ secrets.DB_NAME }}"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
-      keycloak_db:
-        image: postgres:17
-        env:
-          POSTGRES_USER: ${{ secrets.KC_DB_USERNAME }}
-          POSTGRES_PASSWORD: ${{ secrets.KC_DB_PASSWORD }}
-          POSTGRES_DB: keycloakdb
-        ports:
-          - 5434:5432
-        options: >-
-          --health-cmd="pg_isready -U ${{ secrets.KC_DB_USERNAME }} -d keycloakdb"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
-      keycloak:
-        image: quay.io/keycloak/keycloak:26.3.1
-        env:
-          KEYCLOAK_ADMIN: ${{ secrets.KEYCLOAK_ADMIN }}
-          KEYCLOAK_ADMIN_PASSWORD: ${{ secrets.KEYCLOAK_ADMIN_PASSWORD }}
-          KC_DB: postgres
-          KC_DB_URL: jdbc:postgresql://keycloak_db:5432/keycloakdb
-          KC_DB_USERNAME: ${{ secrets.KC_DB_USERNAME }}
-          KC_DB_PASSWORD: ${{ secrets.KC_DB_PASSWORD }}
-          KC_HOSTNAME_URL: http://keycloak:8080
-          KC_HOSTNAME_FRONTEND_URL: http://localhost:8080
-        ports:
-          - 8080:8080
-        options: --health-cmd="curl --fail http://localhost:8080 || exit 1" --health-interval=10s --health-timeout=5s --health-retries=10
-
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd="redis-cli ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 21
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '21'
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
 
-    - name: Wait for Keycloak to be healthy
-      run: |
-        for i in {1..30}; do
-          if curl --fail http://localhost:8080; then
-            echo "Keycloak is up!"
-            break
-          else
-            echo "Waiting for Keycloak..."
-            sleep 5
-          fi
-        done
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
-    - name: Wait for Redis to be healthy
-      run: |
-        for i in {1..30}; do
-          if redis-cli -h localhost -p 6379 ping | grep PONG; then
-            echo "Redis is up!"
-            break
-          else
-            echo "Waiting for Redis..."
-            sleep 5
-          fi
-        done
-
-    - name: Build with Maven
-      run: mvn -B clean package
-
-    - name: Run tests
-      run: mvn test
+      - name: Build and run tests with Maven
+        run: mvn -B verify
