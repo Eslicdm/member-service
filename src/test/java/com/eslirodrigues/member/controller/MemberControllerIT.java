@@ -69,7 +69,6 @@ class MemberControllerIT {
                 .header("alg", "none")
                 .claim("sub", "test-user-id")
                 .claim("scope", "read write")
-
                 .issuedAt(Instant.now())
                 .expiresAt(Instant.now().plusSeconds(60))
                 .build();
