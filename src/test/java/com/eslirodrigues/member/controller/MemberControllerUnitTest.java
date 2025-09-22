@@ -76,7 +76,7 @@ class MemberControllerUnitTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(100)))
                 .andExpect(jsonPath("$.name", is("John Doe")))
-                .andExpect(jsonPath("$.email", is("john.doe@test.comm")))
+                .andExpect(jsonPath("$.email", is("john.doe@test.com")))
                 .andExpect(jsonPath("$.managerId", is(managerId.intValue())));
     }
 
